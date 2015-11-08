@@ -19,8 +19,10 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css',
     ];
     public $js = [
+        'http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js',
         // 'js/jquery.js',
     ];
     public $depends = [
