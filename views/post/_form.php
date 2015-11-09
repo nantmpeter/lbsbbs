@@ -12,23 +12,23 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true,'class'=>'am-form-field','placeholder'=>'在此输入标题...']) ?>
 
-    <?= $form->field($model, 'create_at')->textInput() ?>
+    <?= $form->field($model, 'create_at',['options'=>['style'=>'display:none']])->hiddenInput() ?>
 
-    <?= $form->field($model, 'update_at')->textInput() ?>
+    <?= $form->field($model, 'update_at',['options'=>['style'=>'display:none']])->hiddenInput() ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <!--    <?= $form->field($model, 'user_id')->textInput() ?>-->
 
-    <?= $form->field($model, 'reply_at')->textInput() ?>
+     <!--<?= $form->field($model, 'reply_at')->textInput() ?>-->
 
-   <?= $form->field($model, 'lat')->textInput() ?> 
+   <?= $form->field($model, 'lat',['options'=>['style'=>'display:none']])->hiddenInput() ?> 
  
-   <?= $form->field($model, 'lon')->textInput() ?>
+   <?= $form->field($model, 'lon',['options'=>['style'=>'display:none']])->hiddenInput() ?>
 
-    <?= $form->field($model, 'last_reply_id')->textInput() ?>
+    <!-- <?= $form->field($model, 'last_reply_id')->textInput() ?> -->
 
-    <?= $form->field($model, 'content')->textInput() ?>
+    <?= $form->field($model, 'content')->textarea(['class'=>'am-form-field','placeholder'=>'在此输入内容...']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
-<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript">
     $(function(){
         navigator.geolocation.getCurrentPosition(position);

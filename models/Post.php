@@ -48,13 +48,13 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'title' => '标题',
             'create_at' => 'Create At',
             'update_at' => 'Update At',
             'user_id' => 'User ID',
             'reply_at' => 'Reply At',
             'last_reply_id' => 'Last Reply ID',
-            'content' => 'Content',
+            'content' => '内容',
             'lat' => 'Lat',
             'lon' => 'Lon',
         ];
