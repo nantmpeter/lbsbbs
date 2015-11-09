@@ -17,7 +17,7 @@ $this->title = '附近的公告';
     <?php 
     $models = array_values($dataProvider->getModels());
     foreach ($models as $key => $value) {
-        echo '<li><a href="?r=post/view&id='.$value->id.'">'.$value->title.'</a></li>';
+        echo '<li><a href="/post/view?id='.$value->id.'">'.$value->title.'</a></li>';
     }
      ?>
      </ul>

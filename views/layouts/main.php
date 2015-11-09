@@ -67,5 +67,12 @@ AppAsset::register($this);
 
 <?php $this->endBody() ?>
 </body>
+<script type="text/javascript">
+    $(function(){
+        $("#btn-back").click(function(){
+            history.go(-1);
+        });
+    });
+</script>
 </html>
 <?php $this->endPage() ?>

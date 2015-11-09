@@ -38,6 +38,11 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'urlManager' => [
+            // 'class' => 'yii\',
+            'showScriptName' => false,
+            'enablePrettyUrl' => true,
+        ]
     ],
     'params' => $params,
 ];
