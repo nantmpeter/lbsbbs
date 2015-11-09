@@ -42,6 +42,9 @@ $config = [
             // 'class' => 'yii\',
             'showScriptName' => false,
             'enablePrettyUrl' => true,
+            'rules' => [
+                '/' => '/post'
+            ]
         ]
     ],
     'params' => $params,
