@@ -6,15 +6,13 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
 
-$this->title = $model->title;
+// $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
+    <!-- <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -23,9 +21,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </p> -->
 
-    <?= DetailView::widget([
+<article class="am-article">
+  <div class="am-article-hd">
+    <h1 class="am-article-title"><?= Html::encode($model->title) ?></h1>
+    <p class="am-article-meta"><?php echo date('Y-m-d H:i:s',$model->create_at); ?></p>
+  </div>
+
+  <div class="am-article-bd">
+    <!-- <p class="am-article-lead"></p> -->
+    <?php echo $model->content; ?>
+  </div>
+</article>
+<!--     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -39,6 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'lat', 
             'lon',
         ],
-    ]) ?>
+    ]) ?> -->
 
 </div>

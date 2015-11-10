@@ -42,6 +42,9 @@ AppAsset::register($this);
     .main-post {
         float: right;
     }
+    #main-box {
+        padding: 10px;
+    }
     </style>
 </head>
 <body>
@@ -53,7 +56,9 @@ AppAsset::register($this);
        <!-- <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>-->
-        <?= $content ?>
+        <div id="main-box">
+            <?= $content ?>        
+        </div>
     <!-- </div> -->
 </div>
 <!-- </div> -->
