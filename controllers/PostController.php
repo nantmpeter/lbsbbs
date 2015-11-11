@@ -32,8 +32,11 @@ class PostController extends Controller
      */
     public function actionIndex()
     {
+        $lat = (float)(isset($_GET['lat'])?$_GET['lat']:0);
+        $lon = (float)(isset($_GET['lon'])?$_GET['lon']:0);
+        $sql = 'SELECT id,title,lon,lat, ROUND(6378.138*2*ASIN(SQRT(POW(SIN(('.$lat.'*PI()/180-lat*PI()/180)/2),2)+COS('.$lat.'*PI()/180)*COS(lat*PI()/180)*POW(SIN(('.$lon.'*PI()/180-lon*PI()/180)/2),2)))*1000) AS d FROM post ORDER BY d asc';
         $dataProvider = new ActiveDataProvider([
-            'query' => Post::find(),
+            'query' => Post::findBySql($sql),
         ]);
 
         return $this->render('index', [

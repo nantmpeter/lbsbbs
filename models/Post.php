@@ -20,6 +20,9 @@ use Yii;
  */
 class Post extends \yii\db\ActiveRecord
 {
+    // 距离
+    public $d;
+    
     /**
      * @inheritdoc
      */
@@ -39,6 +42,13 @@ class Post extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 255],
             [['lat', 'lon'], 'string', 'max' => 11]
         ];
+    }
+
+    public function geoList()
+    {
+        $lat = $_GET['lat'];
+        $lon = $_GET['lon'];
+        $sql = 'SELECT id,lon,lat, ROUND(6378.138*2*ASIN(SQRT(POW(SIN(('.$lat.'*PI()/180-lat*PI()/180)/2),2)+COS('.$lat.'*PI()/180)*COS(lat*PI()/180)*POW(SIN(('.$lon.'*PI()/180-lon*PI()/180)/2),2)))*1000) AS d FROM post ORDER BY d DESC';
     }
 
     /**
