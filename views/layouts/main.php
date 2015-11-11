@@ -52,23 +52,12 @@ AppAsset::register($this);
 
 <div class="am-page" id="mobile-index">
 <header class="main-header"><?= Html::a('发帖', ['create'], ['class' => 'btn btn-success main-post']) ?><span class="am-icon-chevron-left" id="btn-back"></span><h1><?= Html::encode($this->title) ?></h1></header>
-    <!-- <div class="container"> -->
-       <!-- <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>-->
+
         <div id="main-box">
             <?= $content ?>        
         </div>
-    <!-- </div> -->
 </div>
-<!-- </div> -->
-<!-- <footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer> -->
 
 <?php $this->endBody() ?>
 </body>

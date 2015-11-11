@@ -7,7 +7,6 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '附近的公告';
-// $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php if(!isset($_GET['lat'])) { ?>
@@ -20,7 +19,6 @@ $this->title = '附近的公告';
             var lat = p.coords.latitude.toString(),
                 lon = p.coords.longitude.toString();
             location.href = "?lat="+lat.substr(0,10)+"&lon="+lon.substr(0,10);
-            // console.log(p.coords.latitude,p.coords.longitude);
         }
     });
 </script>
@@ -41,28 +39,6 @@ $this->title = '附近的公告';
      ?>
     </ul>
   </div>
-    <!-- <h1><?= Html::encode($this->title) ?></h1> -->
-
-   <!--  <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'title',
-            'create_at',
-            'update_at',
-            'user_id',
-            // 'lat',
-            // 'lon',
-            // 'reply_at',
-            // 'last_reply_id',
-            // 'content',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?> -->
-
 </div>
 
 
