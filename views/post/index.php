@@ -35,7 +35,12 @@ $this->title = '附近的公告';
         <?php 
         $models = array_values($dataProvider->getModels());
         foreach ($models as $key => $value) {
-            echo '<li class="am-g am-list-item-dated"><a class="am-list-item-hd" href="/post/view?id='.$value['id'].'">'.$value['title'].'</a><span class="am-list-date">距离'.$value['d'].'米</span></li>';
+            echo '<li class="am-g am-list-item-dated"><a class="am-list-item-hd" href="/post/view?id='.$value['id'].'">'.$value['title'].'</a><span class="am-list-date">';
+            if($value['reply_at'] == 0)
+                echo '创建于 '.date('m-d H:i',$value['create_at']);
+            else
+                echo '最后回复于 '.date('m-d H:i',$value['reply_at']);
+            echo '</span></li>';
         }
      ?>
     </ul>
