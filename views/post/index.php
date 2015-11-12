@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -17,8 +17,8 @@ $this->title = '附近的公告';
         function position(p){
             var lat = p.coords.latitude.toString(),
                 lon = p.coords.longitude.toString();
-            localStorage.lat = lat.substr(0,10);
-            localStorage.lon = lon.substr(0,10);
+                localStorage.lat = lat.substr(0,10);
+                localStorage.lon = lon.substr(0,10);
             location.href = "?lat="+lat.substr(0,10)+"&lon="+lon.substr(0,10);
         }
     });
@@ -35,12 +35,11 @@ $this->title = '附近的公告';
         <?php 
         $models = array_values($dataProvider->getModels());
         foreach ($models as $key => $value) {
-            echo '<li class="am-g am-list-item-dated"><a class="am-list-item-hd" href="/post/view?id='.$value->id.'">'.$value->title.'</a><span class="am-list-date">距离'.$value->d.'米</span></li>';
+            echo '<li class="am-g am-list-item-dated"><a class="am-list-item-hd" href="/post/view?id='.$value['id'].'">'.$value['title'].'</a><span class="am-list-date">距离'.$value['d'].'米</span></li>';
         }
      ?>
     </ul>
+    <?= LinkPager::widget(['pagination' => $pages]); ?>
   </div>
 </div>
-
-
 <?php    } ?>
