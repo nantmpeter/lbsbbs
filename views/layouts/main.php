@@ -35,7 +35,7 @@ AppAsset::register($this);
         text-align: center;
         margin-top: 0;
     }
-    #btn-back {
+    #btn-back,#btn-home {
         position: absolute;
         margin-top: 6px;
     }
@@ -45,13 +45,19 @@ AppAsset::register($this);
     #main-box {
         padding: 10px;
     }
+    #btn-location {
+        float: right;
+        display: block;
+        width: 30px;
+        margin-top: 5px;
+        height: 30px;
+    }
     </style>
 </head>
 <body>
 <?php $this->beginBody() ?>
-
 <div class="am-page" id="mobile-index">
-<header class="main-header"><?= Html::a('发帖', ['create'], ['class' => 'btn btn-success main-post']) ?><span class="am-icon-chevron-left" id="btn-back"></span><h1><?= Html::encode($this->title) ?></h1></header>
+<header class="main-header"><?= Html::a('发帖', ['create'], ['class' => 'btn btn-success main-post']) ?><?php if($this->title != '') { ?><span class="am-icon-chevron-left" id="btn-back"></span><?php }else{ ?><span class="am-icon-home am-icon-sm" id="btn-home"></span><?php } ?> <span class='am-icon-location-arrow' id='btn-location'></span><h1><?= Html::encode($this->title) ?></h1></header>
 
         <div id="main-box">
             <?= $content ?>        
@@ -65,6 +71,16 @@ AppAsset::register($this);
     $(function(){
         $("#btn-back").click(function(){
             history.go(-1);
+        });
+
+        $("#btn-location").click(function(){
+            location.href = '/';
+        });
+        $("#btn-home").click(function(){
+            var url = '/';
+            if(localStorage.lat)
+                url += '?lat='+localStorage.lat+'&lon='+localStorage.lon;
+            location.href = url;
         });
     });
 </script>

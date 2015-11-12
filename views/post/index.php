@@ -8,16 +8,17 @@ use yii\grid\GridView;
 
 $this->title = '附近的公告';
 ?>
-
+<script type="text/javascript" src="/js/jquery.min.js"></script>
 <?php if(!isset($_GET['lat'])) { ?>
 
-<script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript">
     $(function(){
         navigator.geolocation.getCurrentPosition(position);
         function position(p){
             var lat = p.coords.latitude.toString(),
                 lon = p.coords.longitude.toString();
+            localStorage.lat = lat.substr(0,10);
+            localStorage.lon = lon.substr(0,10);
             location.href = "?lat="+lat.substr(0,10)+"&lon="+lon.substr(0,10);
         }
     });

@@ -53,6 +53,7 @@ class PostController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'left_btn' => 'home'
         ]);
     }
 
