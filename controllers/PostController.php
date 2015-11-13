@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Post;
+use app\models\Comment;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -60,7 +61,17 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
+        $p = $_GET['p'];
+        // $comment = Comment::getList($p);
+        $model = new Comment();
+        $dataProvider = new ActiveDataProvider([
+        'query' => $model->find()->where(['post_id'=>$id]),
+        'pagination' => [
+                'pagesize' => '10',
+         ]
+       ]);
         return $this->render('view', [
+            'data' => $dataProvider,
             'model' => $this->findModel($id),
             'left_btn' => 'home'
         ]);

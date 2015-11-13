@@ -10,6 +10,11 @@ use yii\widgets\DetailView;
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style type="text/css">
+    .am-comment {
+        margin-top: 20px;
+    }
+</style>
 <div class="post-view">
 
     <!-- <p>
@@ -34,20 +39,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php echo $model->content; ?>
   </div>
 </article>
-<!--     <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'create_at',
-            'update_at',
-            'user_id',
-            'reply_at',
-            'last_reply_id',
-            'content',
-            'lat', 
-            'lon',
-        ],
-    ]) ?> -->
+<?php $comments = $data->getModels(); ?>
+<article class="am-comment"> <!-- 评论容器 -->
+ <!--  <a href="">
+    <img class="am-comment-avatar" alt=""/> 
+  </a>
+ -->
+ <?php foreach ($comments as $key => $value) { ?>
+       <div class="comment-box"> <!-- 评论内容容器 -->
+    <header class="am-comment-hd">
+      <!--<h3 class="am-comment-title">评论标题</h3>-->
+      <div class="am-comment-meta"> <!-- 评论元数据 -->
+        <!-- <a href="#link-to-user" class="am-comment-author">..</a> -->
+        评论于 <time datetime=""><?php echo date('m-d H:i',$value->create_at) ?></time>
+      </div>
+    </header>
 
+    <div class="am-comment-bd"><?php echo $value->content ?></div> <!-- 评论内容 -->
+  </div>
+ <?php } ?>
+</article>
 </div>
