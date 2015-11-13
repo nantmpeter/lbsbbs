@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 use app\models\Comment;
+use app\models\Post;
 
 class CommentController extends \yii\web\Controller
 {
@@ -13,11 +14,14 @@ class CommentController extends \yii\web\Controller
     public function actionCreate()
     {
     	$data = $_POST['data'];
-    	$data['create_at'] = time();
+    	$time = time();
+    	$data['create_at'] = $time;
     	$data['user_id'] = 0;
     	$comment = new Comment();
     	$comment->attributes = $data;
-    	// var_dump($data,$comment);exit;
+    	$post = new Post();
+    	$post->updateAll(['reply_at'=>$time],'id=:id',[':id'=>$data['post_id']]);
+
     	$comment->save();
 		$this->redirect(array('/post/view','id'=>$data['post_id']));
     }
