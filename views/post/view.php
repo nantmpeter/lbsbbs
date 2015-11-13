@@ -58,5 +58,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="am-comment-bd"><?php echo $value->content ?></div> <!-- 评论内容 -->
   </div>
  <?php } ?>
+<form class="am-form" action='/comment/create' method="post">
+  <!-- <fieldset disabled> -->
+    <div class="am-form-group">
+    <input type="hidden" name="data[post_id]" value="<?php echo $_GET['id'] ?>">
+        <input type="hidden" value="<?php echo Yii::$app->getRequest()->getCsrfToken(); ?>" name="_csrf" />
+       <textarea class="" rows="5" name="data[content]"></textarea>
+    </div>
+    <button type="submit" class="am-btn am-btn-primary">评论</button>
+  <!-- </fieldset> -->
+</form>
 </article>
 </div>
