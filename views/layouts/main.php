@@ -52,6 +52,7 @@ AppAsset::register($this);
         margin-top: 5px;
         height: 30px;
     }
+    .main-header h1{margin-top: 5px;}
     </style>
 </head>
 <body>
