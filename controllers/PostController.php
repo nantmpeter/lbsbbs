@@ -61,7 +61,7 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
-        $p = $_GET['p'];
+        // $p = $_GET['p'];
         // $comment = Comment::getList($p);
         $model = new Comment();
         $dataProvider = new ActiveDataProvider([
