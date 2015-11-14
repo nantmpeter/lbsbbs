@@ -15,6 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
     .am-comment {
         margin-top: 20px;
     }
+    .qrcode {
+        float: right;
+        color: gray;
+    }
 </style>
 <div class="post-view">
 
@@ -31,7 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <article class="am-article">
   <div class="am-article-hd">
-    <h1 class="am-article-title"><?= Html::encode($model->title) ?></h1>
+    <i class="am-icon-qrcode qrcode" data-am-modal="{target: '#my-alert'}"></i>
+    <h1 class="am-article-title" style="margin-top:0"><?= Html::encode($model->title) ?></h1>
     <p class="am-article-meta"><?php echo date('Y-m-d H:i:s',$model->create_at); ?></p>
   </div>
 
@@ -60,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
   </div>
  <?php } ?>
     <?= LinkPager::widget(['pagination' => $pages]); ?>
- 
+
 <form class="am-form" action='/comment/create' method="post">
   <!-- <fieldset disabled> -->
     <div class="am-form-group">
@@ -72,4 +77,49 @@ $this->params['breadcrumbs'][] = $this->title;
   <!-- </fieldset> -->
 </form>
 </article>
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+  <div class="am-modal-dialog">
+    <div id="code" style="padding: 15%;"></div>
+  </div>
 </div>
+<div id="code"></div>
+</div>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+    var str = window.location.href;
+    $('#code').qrcode({width:150,height:150,text:str});
+    
+    // $("#sub_btn").click(function(){
+    //     $("#code").empty();
+    //     var str = toUtf8($("#mytxt").val());
+        
+    //     $("#code").qrcode({
+    //         render: "table",
+    //         width: 200,
+    //         height:200,
+    //         text: str
+    //     });
+    // });
+})
+function toUtf8(str) {   
+    var out, i, len, c;   
+    out = "";   
+    len = str.length;   
+    for(i = 0; i < len; i++) {   
+        c = str.charCodeAt(i);   
+        if ((c >= 0x0001) && (c <= 0x007F)) {   
+            out += str.charAt(i);   
+        } else if (c > 0x07FF) {   
+            out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));   
+            out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));   
+            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));   
+        } else {   
+            out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));   
+            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));   
+        }   
+    }   
+    return out;   
+}
+</script>
