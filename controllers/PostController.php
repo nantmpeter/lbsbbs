@@ -61,19 +61,20 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
-        // $p = $_GET['p'];
-        // $comment = Comment::getList($p);
+        $page_size = 10;
         $model = new Comment();
+        $pages = new Pagination(['totalCount' =>$model->find()->where(['post_id'=>$id])->count(), 'pageSize' => $page_size]);
         $dataProvider = new ActiveDataProvider([
         'query' => $model->find()->where(['post_id'=>$id]),
         'pagination' => [
-                'pagesize' => '10',
+                'pagesize' => $page_size,
          ]
        ]);
         return $this->render('view', [
             'data' => $dataProvider,
             'model' => $this->findModel($id),
-            'left_btn' => 'home'
+            'left_btn' => 'home',
+            'pages' => $pages
         ]);
     }
 
