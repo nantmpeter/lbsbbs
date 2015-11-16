@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true,'class'=>'am-form-field','placeholder'=>'输入密码']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('提交', ['class' => 'am-btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

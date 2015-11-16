@@ -61,6 +61,7 @@ AppAsset::register($this);
         color: gray;
     }
     .main-header h1{margin-top: 5px;}
+    .am-btn {width: 100%}
     </style>
 </head>
 <body>

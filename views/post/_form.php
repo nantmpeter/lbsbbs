@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'content')->textarea(['class'=>'am-form-field','placeholder'=>'在此输入内容...']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? '提交' : 'Update', ['class' =>  'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '提交' : 'Update', ['class' =>  'am-btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
