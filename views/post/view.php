@@ -19,6 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
         float: right;
         color: gray;
     }
+    .am-btn-primary {
+        width: 100%;
+    }
 </style>
 <div class="post-view">
 
@@ -51,7 +54,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <img class="am-comment-avatar" alt=""/> 
   </a>
  -->
- <?php foreach ($comments as $key => $value) { ?>
+ <?php 
+  foreach ($comments as $key => $value) { ?>
        <div class="comment-box"> <!-- 评论内容容器 -->
     <header class="am-comment-hd">
       <!--<h3 class="am-comment-title">评论标题</h3>-->
@@ -66,6 +70,11 @@ $this->params['breadcrumbs'][] = $this->title;
  <?php } ?>
     <?= LinkPager::widget(['pagination' => $pages]); ?>
 
+<?php 
+    if(app\models\User::isGuest()) { ?>
+    <a href="/user/login" class="am-btn am-btn-default">登陆后评论</a>
+    <?php }else{
+ ?>
 <form class="am-form" action='/comment/create' method="post">
   <!-- <fieldset disabled> -->
     <div class="am-form-group">
@@ -76,6 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <button type="submit" class="am-btn am-btn-primary">评论</button>
   <!-- </fieldset> -->
 </form>
+<?php } ?>
 </article>
 <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
   <div class="am-modal-dialog">

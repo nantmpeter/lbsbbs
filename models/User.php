@@ -26,6 +26,7 @@ class User extends /*\yii\base\Object*/ \yii\db\ActiveRecord implements \yii\web
         ],
     ];
 */
+    public $salt = 'lbs20151101';
 
     /**
      * @inheritdoc
@@ -56,8 +57,8 @@ class User extends /*\yii\base\Object*/ \yii\db\ActiveRecord implements \yii\web
     {
         return [
             'id' => 'ID',
-            'username' => 'Username',
-            'password' => 'Password',
+            'username' => '用户名',
+            'password' => '密码',
             'authKey' => 'AuthKey',
             'accessToken' => 'AccessToken',
         ];
@@ -146,6 +147,24 @@ class User extends /*\yii\base\Object*/ \yii\db\ActiveRecord implements \yii\web
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        $pwd = $this->getPwd($password);
+        return $pwd === $this->password;
+    }
+
+    private function getPwd($pwd)
+    {
+        return md5($pwd.$this->create_at.$this->salt);
+    }
+
+    public function save($runValidation = true, $attributeNames = null)
+    {
+        $this->create_at = time();
+        $this->password = $this->getPwd($this->password);
+        return parent::save();
+    }
+
+    public static function isGuest()
+    {
+        return \Yii::$app->user->isGuest;
     }
 }

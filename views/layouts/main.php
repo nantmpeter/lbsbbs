@@ -41,6 +41,8 @@ AppAsset::register($this);
     }
     .main-post {
         float: right;
+        position: absolute;
+        right: 10px;
     }
     #main-box {
         padding: 10px;
@@ -48,6 +50,8 @@ AppAsset::register($this);
     #btn-location {
         float: right;
         display: block;
+        position: absolute;
+        right: 60px;
         width: 30px;
         margin-top: 5px;
         height: 30px;
@@ -62,8 +66,12 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <div class="am-page" id="mobile-index">
-<header class="main-header"><?= Html::a('发帖', ['create'], ['class' => 'btn btn-success main-post']) ?><?php if($this->title != '') { ?><span class="am-icon-chevron-left" id="btn-back"></span><?php }else{ ?><span class="am-icon-home am-icon-sm" id="btn-home"></span><?php } ?> <span class='am-icon-location-arrow' id='btn-location'></span><h1><?= Html::encode($this->title) ?></h1></header>
-
+<header class="main-header"><?= Html::a('发帖', ['/post/create'], ['class' => 'btn btn-success main-post']) ?><?php if($this->title != '') { ?><span class="am-icon-chevron-left" id="btn-back"></span><?php }else{ ?><span class="am-icon-home am-icon-sm" id="btn-home"></span><?php } ?> <span class='am-icon-location-arrow' id='btn-location'></span><h1><?= Html::encode($this->title) ?></h1></header>
+<!-- <form action='/user/logout' method="post">
+        <input type="hidden" value="<?php echo Yii::$app->getRequest()->getCsrfToken(); ?>" name="_csrf" />
+    <button type="submit">logout</button>
+</form> -->
+<script type="text/javascript" src="/js/jquery.min.js"></script>
         <div id="main-box">
             <?= $content ?>        
         </div>

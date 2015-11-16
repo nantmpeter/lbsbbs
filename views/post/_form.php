@@ -7,7 +7,10 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Post */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<style type="text/css">
+    .btn-primary { width: 100%; }
+    label {display: none}
+</style>
 <div class="post-form">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -31,7 +34,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'content')->textarea(['class'=>'am-form-field','placeholder'=>'在此输入内容...']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '提交' : 'Update', ['class' =>  'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
