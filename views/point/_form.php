@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Post */
+/* @var $model app\models\Point */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <style type="text/css">
@@ -15,23 +15,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true,'class'=>'am-form-field','placeholder'=>'在此输入标题...']) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true,'class'=>'am-form-field','placeholder'=>'在此输入地名...']) ?>
 
     <?= $form->field($model, 'create_at',['options'=>['style'=>'display:none']])->hiddenInput() ?>
-
-    <?= $form->field($model, 'update_at',['options'=>['style'=>'display:none']])->hiddenInput() ?>
-
-    <!--    <?= $form->field($model, 'user_id')->textInput() ?>-->
-
-     <!--<?= $form->field($model, 'reply_at')->textInput() ?>-->
 
    <?= $form->field($model, 'lat',['options'=>['style'=>'display:none']])->hiddenInput(['class'=>'lat']) ?> 
  
    <?= $form->field($model, 'lon',['options'=>['style'=>'display:none']])->hiddenInput(['class'=>'lon']) ?>
 
-    <!-- <?= $form->field($model, 'last_reply_id')->textInput() ?> -->
 
-    <?= $form->field($model, 'content')->textarea(['class'=>'am-form-field','placeholder'=>'在此输入内容...']) ?>
+    <?= $form->field($model, 'desc')->textarea(['class'=>'am-form-field','placeholder'=>'在此输入描述...']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? '提交' : 'Update', ['class' =>  'am-btn btn-primary']) ?>

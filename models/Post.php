@@ -17,6 +17,7 @@ use Yii;
  * @property resource $content
  * @property string $lat
  * @property string $lon
+ * @property integer $point_id
  */
 class Post extends \yii\db\ActiveRecord
 {
@@ -37,7 +38,8 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['create_at', 'update_at', 'user_id', 'reply_at', 'last_reply_id'], 'integer'],
+            [['create_at', 'update_at', 'user_id', 'reply_at', 'last_reply_id', 'point_id'], 'integer'],
+            [['content'], 'required'],
             [['content'], 'string'],
             [['title'], 'string', 'max' => 255],
             [['lat', 'lon'], 'string', 'max' => 11]
@@ -67,6 +69,7 @@ class Post extends \yii\db\ActiveRecord
             'content' => '内容',
             'lat' => 'Lat',
             'lon' => 'Lon',
+            'point_id' => 'Point ID', 
         ];
     }
 }
