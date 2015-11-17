@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Post;
 use app\models\Comment;
+use app\models\User;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -99,7 +100,8 @@ class PostController extends Controller
     public function actionCreate()
     {
         $model = new Post();
-        $model->create_at = $model->update_at = time();
+        $model->create_at = $model->update_at = $model->reply_at = time();
+        $model->user_id = User::getCurrentId();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

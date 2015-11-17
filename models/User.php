@@ -167,4 +167,10 @@ class User extends /*\yii\base\Object*/ \yii\db\ActiveRecord implements \yii\web
     {
         return \Yii::$app->user->isGuest;
     }
+	
+	public static function getCurrentId()
+	{
+		$id = \Yii::$app->user->getId();
+        return $id ? $id : 0;
+	}
 }
