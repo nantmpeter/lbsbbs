@@ -44,8 +44,12 @@ $this->title = '附近的公告';
 <div class="am-list-news-bd">
 <div>
 <?php 
-    foreach ($points as $key => $point) {
-        echo '<a href="/point/view?id='.$point->id.'" class="am-badge am-badge-warning am-text-default">'.$point->name.'</a> ';
+    if($points) {
+        foreach ($points as $key => $point) {
+            echo '<a href="/point/view?id='.$point->id.'" class="am-badge am-badge-warning am-text-default">'.$point->name.'</a> ';
+        }
+    }else{
+        echo '<div class="am-alert am-alert-warning"><a href="/point/create">附近没有地点，新建一个试试？</a></div>';
     }
  ?>
  <a href="#" class="more am-icon-angle-double-right"></a>    
