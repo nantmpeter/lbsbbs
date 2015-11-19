@@ -62,6 +62,7 @@ AppAsset::register($this);
     }
     .main-header h1{margin-top: 5px;}
     .am-btn {width: 100%}
+    a:visited,a:hover { text-decoration: none;}
     </style>
 </head>
 <body>
