@@ -54,4 +54,10 @@ class Point extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
         ];
     }
+
+    public static function getPoints($num,$lat,$lon)
+    {
+        $sql = 'SELECT * from (SELECT id,name,lon,lat,create_at, post_num, ROUND(6378.138*2*ASIN(SQRT(POW(SIN((:lat*PI()/180-lat*PI()/180)/2),2)+COS(:lat*PI()/180)*COS(lat*PI()/180)*POW(SIN((:lon*PI()/180-lon*PI()/180)/2),2)))*1000) AS d FROM point ORDER BY d) a where d<300 order by post_num desc,create_at desc limit :num';
+        return self::findBySql($sql,[':lat'=>$lat,':lon'=>$lon,':num'=>$num])->all();
+    }
 }

@@ -8,6 +8,9 @@ use yii\widgets\LinkPager;
 
 $this->title = '附近的公告';
 ?>
+<style type="text/css">
+    .more {float: right;}
+</style>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <?php if(!isset($_GET['lat'])) { ?>
 
@@ -28,9 +31,26 @@ $this->title = '附近的公告';
 <!-- 触发 button -->
 
 <?php }else{?>
+<script type="text/javascript">
+    $(function(){
+                $(".more").click(function(){
+                    location.href = '/point?lat='+localStorage.lat+'&lon='+localStorage.lon;
+                    return false;
+                });
+            });
+</script>
 <div class="post-index">
 
 <div class="am-list-news-bd">
+<div>
+<?php 
+    foreach ($points as $key => $point) {
+        echo '<a href="/point/view?id='.$point->id.'" class="am-badge am-badge-warning am-text-default">'.$point->name.'</a> ';
+    }
+ ?>
+ <a href="#" class="more am-icon-angle-double-right"></a>    
+</div>
+
     <ul class="am-list">
         <?php 
         $models = array_values($dataProvider->getModels());

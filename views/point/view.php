@@ -6,7 +6,7 @@ use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-// $this->title = ;
+$this->title = $model->name;
 ?>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 

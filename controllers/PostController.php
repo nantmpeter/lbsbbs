@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Post;
+use app\models\Point;
 use app\models\Comment;
 use app\models\User;
 use yii\data\ActiveDataProvider;
@@ -54,6 +55,7 @@ class PostController extends Controller
         $sql = 'SELECT * from (SELECT id,title,lon,lat,reply_at,create_at, ROUND(6378.138*2*ASIN(SQRT(POW(SIN((:lat*PI()/180-lat*PI()/180)/2),2)+COS(:lat*PI()/180)*COS(lat*PI()/180)*POW(SIN((:lon*PI()/180-lon*PI()/180)/2),2)))*1000) AS d FROM post ORDER BY d) a where d<300 order by reply_at desc,create_at desc';
         $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM ('.$sql.') a',[':lat'=>$lat,':lon'=>$lon])->queryScalar();
         $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $page_size]);
+        $points = Point::getPoints(5,$lat,$lon);
         $dataProvider = new SqlDataProvider([
                 'sql'=>$sql,
                 'params'=>[':lat'=>$lat,':lon'=>$lon],
@@ -64,7 +66,8 @@ class PostController extends Controller
             ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'pages' => $pages
+            'pages' => $pages,
+            'points' => $points
         ]);
     }
 
@@ -102,6 +105,11 @@ class PostController extends Controller
         $model = new Post();
         $model->create_at = $model->update_at = $model->reply_at = time();
         $model->user_id = User::getCurrentId();
+        if($model->point_id > 0) {
+            $point = Point::find($model->point_id);
+            $point->post_num += 1;
+            $point->save();
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

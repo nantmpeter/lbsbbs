@@ -67,7 +67,18 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <div class="am-page" id="mobile-index">
-<header class="main-header"><?= Html::a('发帖', ['/post/create'], ['class' => 'btn btn-success main-post']) ?><?php if($this->title != '') { ?><span class="am-icon-chevron-left" id="btn-back"></span><?php }else{ ?><span class="am-icon-home am-icon-sm" id="btn-home"></span><?php } ?> <span class='am-icon-location-arrow' id='btn-location'></span><h1><?= Html::encode($this->title) ?></h1></header>
+<header class="main-header">
+<?php if($this->context->id == 'point') { ?>
+<?= Html::a('添加', ['/point/create'], ['class' => 'btn btn-success main-post']) ?>
+<?php }else { ?>
+<?= Html::a('发帖', ['/post/create'], ['class' => 'btn btn-success main-post']) ?>
+<?php } ?>
+<?php if($this->title != '' && $this->context->id != 'point') { ?>
+<span class="am-icon-chevron-left" id="btn-back"></span>
+<?php }else{ ?>
+<span class="am-icon-home am-icon-sm" id="btn-home"></span>
+<?php } ?> 
+<span class='am-icon-location-arrow' id='btn-location'></span><h1><?= Html::encode($this->title) ?></h1></header>
 <!-- <form action='/user/logout' method="post">
         <input type="hidden" value="<?php echo Yii::$app->getRequest()->getCsrfToken(); ?>" name="_csrf" />
     <button type="submit">logout</button>

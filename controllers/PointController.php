@@ -35,12 +35,23 @@ class PointController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Point::find(),
-        ]);
-
+        $page_size = 10;
+        $lat = (float)(isset($_GET['lat'])?$_GET['lat']:0);
+        $lon = (float)(isset($_GET['lon'])?$_GET['lon']:0);
+        $sql = 'SELECT * from (SELECT id,name,lon,lat,create_at,post_num, ROUND(6378.138*2*ASIN(SQRT(POW(SIN((:lat*PI()/180-lat*PI()/180)/2),2)+COS(:lat*PI()/180)*COS(lat*PI()/180)*POW(SIN((:lon*PI()/180-lon*PI()/180)/2),2)))*1000) AS d FROM point ORDER BY d) a where d<300 order by post_num desc,create_at desc';
+        $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM ('.$sql.') a',[':lat'=>$lat,':lon'=>$lon])->queryScalar();
+        $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $page_size]);
+        $dataProvider = new SqlDataProvider([
+                'sql'=>$sql,
+                'params'=>[':lat'=>$lat,':lon'=>$lon],
+                'totalCount' => $count,
+                'pagination' => [
+                    'pageSize' => $page_size,
+                ],
+            ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'pages' => $pages,
         ]);
     }
 
@@ -66,10 +77,11 @@ class PointController extends Controller
                     'pageSize' => $page_size,
                 ],
             ]);
-
+        $model = $this->findModel($id);
         return $this->render('view', [
             'dataProvider' => $dataProvider,
-            'pages' => $pages
+            'pages' => $pages,
+            'model' => $model
         ]);
         // return $this->render('view', [
         //     'model' => $this->findModel($id),
