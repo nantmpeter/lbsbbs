@@ -69,10 +69,10 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <div class="am-page" id="mobile-index">
 <header class="main-header">
-<?php if($this->context->id == 'point') { ?>
+<?php if($this->context->id == 'point' && $this->context->module->requestedAction->id == 'index') { ?>
 <?= Html::a('添加', ['/point/create'], ['class' => 'btn btn-success main-post']) ?>
 <?php }else { ?>
-<?= Html::a('发帖', ['/post/create'], ['class' => 'btn btn-success main-post']) ?>
+<a class="btn btn-success main-post" href="/post/create<?php if($this->context->id == 'point' && $this->context->module->requestedAction->id == 'view') { echo '?point='.$this->context->actionParams['id']; } ?>">发帖</a>
 <?php } ?>
 <?php if($this->title != '' && $this->context->id != 'point') { ?>
 <span class="am-icon-chevron-left" id="btn-back"></span>

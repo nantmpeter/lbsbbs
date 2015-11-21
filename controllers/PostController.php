@@ -115,6 +115,7 @@ class PostController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'point' => Point::findOne($_GET['point'])
             ]);
         }
     }

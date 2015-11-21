@@ -32,6 +32,12 @@ use yii\widgets\ActiveForm;
     <!-- <?= $form->field($model, 'last_reply_id')->textInput() ?> -->
 
     <?= $form->field($model, 'content')->textarea(['class'=>'am-form-field','placeholder'=>'在此输入内容...']) ?>
+    <?php if($point) { ?>
+    <div class="form-group field-post-content required has-error">
+        <span class='am-icon-map-marker'></span> <?php echo $point->name ?>
+        <input type="hidden" id="post-point=id" class="point_id" name="Post[point_id]" value="<?= $point->id ?>">
+    </div>
+    <?php } ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? '提交' : 'Update', ['class' =>  'am-btn btn-primary']) ?>
