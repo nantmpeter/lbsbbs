@@ -110,12 +110,13 @@ class PostController extends Controller
             $point->post_num += 1;
             $point->save();
         }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'point' => Point::findOne($_GET['point'])
+                'point' => Point::findOne(isset($_GET['point'])?$_GET['point']:'')
             ]);
         }
     }

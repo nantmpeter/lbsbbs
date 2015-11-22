@@ -22,6 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
     .am-btn-primary {
         width: 100%;
     }
+    #img-box img{
+        width: 100%;
+        margin-top: 10px;
+    }
 </style>
 <div class="post-view">
 
@@ -45,9 +49,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
   <div class="am-article-bd">
     <!-- <p class="am-article-lead"></p> -->
-    <?php echo $model->content; ?>
+       <?php echo $model->content; ?>
   </div>
 </article>
+<div id="img-box">
+      <?php $img = explode(',', $model->img); 
+    if($img) {
+        $img = array_filter($img);
+        foreach ($img as $key => $value) {
+            echo '<img src="'.Yii::$app->params['imgUrl'].$value.'" />';
+        }
+    }
+     ?>
+
+</div>
+
 <?php $comments = $data->getModels(); ?>
 <article class="am-comment"> <!-- 评论容器 -->
  <!--  <a href="">

@@ -42,7 +42,8 @@ class Post extends \yii\db\ActiveRecord
             [['content'], 'required'],
             [['content'], 'string'],
             [['title'], 'string', 'max' => 255],
-            [['lat', 'lon'], 'string', 'max' => 11]
+            [['lat', 'lon'], 'string', 'max' => 11],
+            [['img'], 'string', 'max' => 256]
         ];
     }
 
@@ -70,6 +71,7 @@ class Post extends \yii\db\ActiveRecord
             'lat' => 'Lat',
             'lon' => 'Lon',
             'point_id' => 'Point ID', 
+            'img' => 'Img',
         ];
     }
 }
