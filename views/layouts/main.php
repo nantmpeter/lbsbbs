@@ -66,6 +66,7 @@ AppAsset::register($this);
     </style>
 </head>
 <body>
+
 <?php $this->beginBody() ?>
 <div class="am-page" id="mobile-index">
 <header class="main-header">

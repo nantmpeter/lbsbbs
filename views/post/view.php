@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
     if($img) {
         $img = array_filter($img);
         foreach ($img as $key => $value) {
-            echo '<img src="'.Yii::$app->params['imgUrl'].$value.'" />';
+            echo '<img src="'.Yii::$app->params['imgUrl'].$value.'?imageView2/1/w/500/q/50" />';
         }
     }
      ?>
