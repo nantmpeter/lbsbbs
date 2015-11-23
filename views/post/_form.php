@@ -122,7 +122,7 @@ use yii\widgets\ActiveForm;
                var res = $.parseJSON(info);
 
                var sourceLink = domain + res.key; //获取上传成功后的文件的Url
-               $("#img-box").append('<img src="'+sourceLink+'">');
+               $("#img-box").append('<img src="'+sourceLink+'?imageView2/1/w/100/q/30">');
                $("#post-img").val($("#post-img").val()+res.key+',');
         },
         'Error': function(up, err, errTip) {
