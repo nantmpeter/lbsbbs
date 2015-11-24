@@ -11,7 +11,8 @@ use Yii;
  * @property resource $content
  * @property integer $create_at
  * @property integer $user_id
- * @property integer $post_id 
+ * @property integer $post_id
+ * @property string $img
  */
 class Comment extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,8 @@ class Comment extends \yii\db\ActiveRecord
         return [
             [['content', 'create_at', 'user_id', 'post_id'], 'required'],
             [['content'], 'string'],
-            [['create_at', 'user_id', 'post_id'], 'integer']
+            [['create_at', 'user_id', 'post_id'], 'integer'],
+            [['img'], 'string', 'max' => 256]
         ];
     }
 
@@ -45,13 +47,8 @@ class Comment extends \yii\db\ActiveRecord
             'content' => 'Content',
             'create_at' => 'Create At',
             'user_id' => 'User ID',
-            'post_id' => 'Post ID', 
+            'post_id' => 'Post ID',
+            'img' => 'Img',
         ];
-    }
-
-    public static function getList($page)
-    {
-        $page_size = 10;
-        // self::find
     }
 }
