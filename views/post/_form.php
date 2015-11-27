@@ -21,6 +21,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'create_at',['options'=>['style'=>'display:none']])->hiddenInput() ?>
 
     <?= $form->field($model, 'update_at',['options'=>['style'=>'display:none']])->hiddenInput() ?>
+    <?= $form->field($model, 'reply_at',['options'=>['style'=>'display:none']])->hiddenInput() ?>
 
     <!--    <?= $form->field($model, 'user_id')->textInput() ?>-->
 
