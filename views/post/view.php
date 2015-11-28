@@ -134,7 +134,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <div id="container" style="position: relative;" class="form-group field-post-content required has-error">
-        <a class="btn btn-default btn-lg am-icon-fa-plus-square-o" id="pickfiles" href="#" style="position: relative; z-index: 1;">
+        <a class="btn btn-default am-icon-fa-plus-square-o" id="pickfiles" href="#" style="position: relative; z-index: 1;">
             <i class="glyphicon glyphicon-plus"></i>
         </a>
             <span class='img-box'>
