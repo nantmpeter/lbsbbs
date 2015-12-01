@@ -127,18 +127,18 @@ class PostController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-        $model->update_at = time();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
+    // public function actionUpdate($id)
+    // {
+    //     $model = $this->findModel($id);
+    //     $model->update_at = time();
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     } else {
+    //         return $this->render('update', [
+    //             'model' => $model,
+    //         ]);
+    //     }
+    // }
 
     /**
      * Deletes an existing Post model.
@@ -146,12 +146,12 @@ class PostController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
+    //     return $this->redirect(['index']);
+    // }
 
     /**
      * Finds the Post model based on its primary key value.
@@ -168,4 +168,22 @@ class PostController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionTop($id)
+    {
+        $model = $this->findModel($id);
+        $point = Point::findOne($model->point_id);
+        if($point->user_id == \Yii::$app->user->id)
+            $model->is_top = 1;
+        $r = $model->save();
+    }
+
+    public function actionUntop($id)
+    {
+        $model = $this->findModel($id);
+        $point = Point::findOne($model->point_id);
+        if($point->user_id == \Yii::$app->user->id)
+            $model->is_top = 0;
+        $r = $model->save();
+    }    
 }

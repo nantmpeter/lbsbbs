@@ -23,12 +23,24 @@ $this->title = $model->name;
         $models = array_values($dataProvider->getModels());
 
         foreach ($models as $key => $value) {
-            echo '<li class="am-g am-list-item-dated"><a class="am-list-item-hd" href="/post/view?id='.$value['id'].'">'.$value['title'].'</a><span class="am-list-date">';
+            echo '<li class="am-g am-list-item-dated"><a class="am-list-item-hd" href="/post/view?id='.$value['id'].'">';
+            if($value['is_top'] == 1)
+                echo '<strong class="am-badge am-badge-danger am-round">顶</strong> ';
+            echo $value['title'];
+                        // 创建者有权置顶
+            if(\Yii::$app->user->id == $model->user_id){
+                if($value['is_top'] == 0)
+                    echo ' <span post-id="'.$value['id'].'" class="am-badge am-badge-danger set-top">设置为置顶</span>';
+                else
+                    echo ' <span post-id="'.$value['id'].'" class="am-badge am-badge-warning unset-top">取消置顶</span>';
+            }
+            echo '</a><span class="am-list-date">';
             if($value['reply_at'] == $value['create_at'])
                 echo '创建于 '.date('m-d H:i',$value['create_at']);
             else
                 echo '最后回复于 '.date('m-d H:i',$value['reply_at']);
-            echo '</span></li>';
+            echo '</span>';
+            echo '</li>';
         }
      ?>
     </ul>
@@ -36,3 +48,21 @@ $this->title = $model->name;
   </div>
 </div>
 
+<script type="text/javascript">
+    $(function(){
+        $('.set-top').click(function(){
+            var id = $(this).attr('post-id');
+            $.get('/post/top',{'id':id},function(){
+                location.reload();
+            });
+            return false;
+        });
+        $('.unset-top').click(function(){
+            var id = $(this).attr('post-id');
+            $.get('/post/untop',{'id':id},function(){
+                location.reload();
+            });
+            return false;
+        });
+    })
+</script>

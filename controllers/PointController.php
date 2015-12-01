@@ -70,7 +70,7 @@ class PointController extends Controller
         $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post where point_id = :id',[':id'=>$id])->queryScalar();
         $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $page_size]);
         $dataProvider = new SqlDataProvider([
-                'sql'=>'SELECT * FROM post where point_id = :id',
+                'sql'=>'SELECT * FROM post where point_id = :id order by is_top desc,reply_at desc,create_at desc',
                 'params'=>[':id'=>$id],
                 'totalCount' => $count,
                 'pagination' => [
