@@ -21,6 +21,14 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <style type="text/css">
+    body {
+        padding-bottom: 25px;
+    }
+    footer {
+        position: fixed;
+        bottom: 0;
+        color: green;
+    }
     .main-header {    
         z-index: 100;
         background: #0e90d2;
@@ -91,8 +99,20 @@ AppAsset::register($this);
         </div>
 </div>
 
-
+<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">问题反馈</div>
+    <div class="am-modal-bd">
+      来来来，吐槽点啥吧，如果你希望得到我的回复，请在反馈中写上您的联系方式，O(∩_∩)O谢谢！！
+      <textarea class="am-modal-prompt-input" style="width:100%;height:200px"></textarea>
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+    </div>
+  </div>
+</div>
 <?php $this->endBody() ?>
+<footer><i class='am-icon-question-circle am-icon-md feedback'></i></footer>
 </body>
 <script type="text/javascript">
     $(function(){
@@ -108,6 +128,19 @@ AppAsset::register($this);
             if(localStorage.lat)
                 url += '?lat='+localStorage.lat+'&lon='+localStorage.lon;
             location.href = url;
+        });
+        $(".feedback").click(function(){
+            $('#my-prompt').modal({
+              relatedTarget: this,
+              onConfirm: function(e) {
+                $.post('/feedback/create',{'Feedback[content]':e.data,'_csrf':'<?php echo Yii::$app->getRequest()->getCsrfToken(); ?>'},function(msg){
+                    alert('感谢你的反馈！');
+                });
+              },
+              onCancel: function(e) {
+                alert('不想说!');
+              }
+            });
         });
     });
 </script>

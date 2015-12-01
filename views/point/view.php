@@ -26,19 +26,18 @@ $this->title = $model->name;
             echo '<li class="am-g am-list-item-dated"><a class="am-list-item-hd" href="/post/view?id='.$value['id'].'">';
             if($value['is_top'] == 1)
                 echo '<strong class="am-badge am-badge-danger am-round">顶</strong> ';
-            echo $value['title'];
-                        // 创建者有权置顶
+            echo $value['title'].'</a><span class="am-list-date">';
+            if($value['reply_at'] == $value['create_at'])
+                echo '创建于 '.date('m-d H:i',$value['create_at']);
+            else
+                echo '最后回复于 '.date('m-d H:i',$value['reply_at']);
+                                    // 创建者有权置顶
             if(\Yii::$app->user->id == $model->user_id){
                 if($value['is_top'] == 0)
                     echo ' <span post-id="'.$value['id'].'" class="am-badge am-badge-danger set-top">设置为置顶</span>';
                 else
                     echo ' <span post-id="'.$value['id'].'" class="am-badge am-badge-warning unset-top">取消置顶</span>';
             }
-            echo '</a><span class="am-list-date">';
-            if($value['reply_at'] == $value['create_at'])
-                echo '创建于 '.date('m-d H:i',$value['create_at']);
-            else
-                echo '最后回复于 '.date('m-d H:i',$value['reply_at']);
             echo '</span>';
             echo '</li>';
         }
