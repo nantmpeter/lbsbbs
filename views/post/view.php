@@ -11,24 +11,6 @@ use yii\widgets\LinkPager;
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<style type="text/css">
-    .am-comment {
-        margin-top: 20px;
-    }
-    .qrcode {
-        float: right;
-        color: gray;
-    }
-    .am-btn-primary {
-        width: 100%;
-    }
-    #img-box img{
-        width: 100%;
-        margin-top: 10px;
-    }
-    .img-box img {width: 45px; margin: 5px;}
-
-</style>
 <div class="post-view">
 
     <!-- <p>
@@ -147,52 +129,8 @@ $this->params['breadcrumbs'][] = $this->title;
 </form>
 <?php } ?>
 </article>
-<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
-  <div class="am-modal-dialog">
-    <div id="code" style="padding: 15%;"></div>
-  </div>
-</div>
-<div id="code"></div>
 </div>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
-<script type="text/javascript">
-    $(function(){
-    var str = window.location.href;
-    $('#code').qrcode({width:150,height:150,text:str});
-    
-    // $("#sub_btn").click(function(){
-    //     $("#code").empty();
-    //     var str = toUtf8($("#mytxt").val());
-        
-    //     $("#code").qrcode({
-    //         render: "table",
-    //         width: 200,
-    //         height:200,
-    //         text: str
-    //     });
-    // });
-})
-function toUtf8(str) {   
-    var out, i, len, c;   
-    out = "";   
-    len = str.length;   
-    for(i = 0; i < len; i++) {   
-        c = str.charCodeAt(i);   
-        if ((c >= 0x0001) && (c <= 0x007F)) {   
-            out += str.charAt(i);   
-        } else if (c > 0x07FF) {   
-            out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));   
-            out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));   
-            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));   
-        } else {   
-            out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));   
-            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));   
-        }   
-    }   
-    return out;   
-}
-</script>
 <script type="text/javascript" src="/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="/js/qiniu.min.js"></script>
 <script type="text/javascript">

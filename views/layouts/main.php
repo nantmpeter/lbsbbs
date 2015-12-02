@@ -55,7 +55,7 @@ AppAsset::register($this);
     #main-box {
         padding: 10px;
     }
-    #btn-location {
+    #btn-location,.share {
         float: right;
         display: block;
         position: absolute;
@@ -72,6 +72,24 @@ AppAsset::register($this);
     .am-btn {width: 100%}
     a:visited,a:hover { text-decoration: none;}
     </style>
+    <style type="text/css">
+    .am-comment {
+        margin-top: 20px;
+    }
+    .qrcode {
+        float: right;
+        color: gray;
+    }
+    .am-btn-primary {
+        width: 100%;
+    }
+    #img-box img{
+        width: 100%;
+        margin-top: 10px;
+    }
+    .img-box img {width: 45px; margin: 5px;}
+
+</style>
 </head>
 <body>
 
@@ -84,11 +102,11 @@ AppAsset::register($this);
 <a class="btn btn-success main-post" href="/post/create<?php if($this->context->id == 'point' && $this->context->module->requestedAction->id == 'view') { echo '?point='.$this->context->actionParams['id']; } ?>">发帖</a>
 <?php } ?>
 <?php if($this->title != '' && $this->context->id != 'point') { ?>
-<span class="am-icon-chevron-left" id="btn-back"></span>
+<span class="am-icon-chevron-left" id="btn-back"></span><span class='am-icon-location-arrow' id='btn-location'></span>
 <?php }else{ ?>
-<span class="am-icon-home am-icon-sm" id="btn-home"></span>
+<span class="am-icon-home am-icon-sm" id="btn-home"></span><span class='am-icon-share-alt share' data-am-modal="{target: '#my-actions'}"></span>
 <?php } ?> 
-<span class='am-icon-location-arrow' id='btn-location'></span><h1><?= Html::encode($this->title) ?></h1></header>
+<h1><?= Html::encode($this->title) ?></h1></header>
 <!-- <form action='/user/logout' method="post">
         <input type="hidden" value="<?php echo Yii::$app->getRequest()->getCsrfToken(); ?>" name="_csrf" />
     <button type="submit">logout</button>
@@ -112,6 +130,28 @@ AppAsset::register($this);
   </div>
 </div>
 <?php $this->endBody() ?>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+  <div class="am-modal-dialog">
+    <div id="code" style="padding: 15%;"></div>
+  </div>
+</div>
+
+<div class="am-modal-actions" id="my-actions">
+  <div class="am-modal-actions-group">
+    <ul class="am-list">
+      <li class="am-modal-actions-header" data-am-modal="{target: '#my-alert'}"><i class="am-icon-qrcode qrcode" style='float:inherit'></i> 二维码</li>
+      <!-- <li><a href="#"><span class="am-icon-wechat"></span> ...</a></li>
+      <li class="am-modal-actions-danger">
+        <a href="#"><i class="am-icon-twitter"></i> ...</a>
+      </li> -->
+    </ul>
+  </div>
+  <div class="am-modal-actions-group">
+    <button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
+  </div>
+</div>
+
 <footer><i class='am-icon-question-circle am-icon-md feedback'></i></footer>
 </body>
 <script type="text/javascript">
@@ -143,6 +183,32 @@ AppAsset::register($this);
             });
         });
     });
+</script>
+<script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+    var str = window.location.href;
+    $('#code').qrcode({width:150,height:150,text:str});
+})
+function toUtf8(str) {   
+    var out, i, len, c;   
+    out = "";   
+    len = str.length;   
+    for(i = 0; i < len; i++) {   
+        c = str.charCodeAt(i);   
+        if ((c >= 0x0001) && (c <= 0x007F)) {   
+            out += str.charAt(i);   
+        } else if (c > 0x07FF) {   
+            out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));   
+            out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));   
+            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));   
+        } else {   
+            out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));   
+            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));   
+        }   
+    }   
+    return out;   
+}
 </script>
 </html>
 <?php $this->endPage() ?>
