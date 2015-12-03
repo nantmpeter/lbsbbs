@@ -46,7 +46,9 @@ $this->title = '附近的公告';
 <?php 
     if($points) {
         foreach ($points as $key => $point) {
-            echo '<a href="/point/view?id='.$point->id.'" class="am-badge am-badge-warning am-text-default">'.$point->name.'</a> ';
+            echo '<a href="/point/view?id='.$point->id.'" class="am-badge ';
+            if($point->auth) echo "am-badge-danger am-round"; else echo "am-badge-warning";
+            echo ' am-text-default">'.$point->name.'</a> ';
         }
         echo '<a href="#" class="more am-icon-angle-double-right"></a>';
     }else{

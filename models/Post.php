@@ -75,4 +75,22 @@ class Post extends \yii\db\ActiveRecord
             'is_top' => 'Is Top',
         ];
     }
+
+    public function beforeSave($insert)
+    {
+        $post = \Yii::$app->request->post();
+        if (parent::beforeSave($insert)) {
+            if($insert) {
+                if(isset($post['Post'])) {
+                    // 30 分钟内禁止同一个人发布标题相同的帖子
+                    $r = Post::find()->where(['user_id'=>User::getCurrentId(),'title'=>$post['Post']['title']])->andWhere('create_at > :time',[':time'=>time()-60*30])->all();
+                    if(count($r) > 0)
+                        return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -105,13 +105,12 @@ class PostController extends Controller
         $model = new Post();
         $model->create_at = $model->update_at = $model->reply_at = time();
         $model->user_id = User::getCurrentId();
-        if($model->point_id > 0) {
-            $point = Point::find($model->point_id);
-            $point->post_num += 1;
-            $point->save();
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if($model->point_id > 0) {
+                $point = Point::findOne($model->point_id);
+                $point->post_num += 1;
+                $point->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
