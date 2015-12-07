@@ -23,10 +23,9 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js',
-        // 'js/jquery.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        // 'yii\web\YiiAsset',
+        // 'yii\bootstrap\BootstrapAsset',
     ];
 }

@@ -15,5 +15,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-<a href="/user/reg" class="am-btn am-btn-warning">注册</a>
+<a href="/user/reg" class="am-btn am-btn-success btn-bar">注册</a>
 </div>

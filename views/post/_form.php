@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
 
 
 <div id="container" style="position: relative;" class="form-group field-post-content required has-error">
-    <a class="btn btn-default am-icon-fa-plus-square-o" id="pickfiles" href="#" style="position: relative; z-index: 1;">
+    <a class="btn btn-default am-icon-plus-circle am-icon-lg" id="pickfiles" href="#" style="position: relative; z-index: 1;padding-left:0;color:gray;">
         <i class="glyphicon glyphicon-plus"></i>
     </a>
         <span id='img-box'>
@@ -53,7 +53,7 @@ use yii\widgets\ActiveForm;
     <?php } ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? '提交' : 'Update', ['class' =>  'am-btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '提交' : 'Update', ['class' =>  'am-btn am-btn-primary btn-bar']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

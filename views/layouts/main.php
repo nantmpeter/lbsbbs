@@ -68,8 +68,6 @@ AppAsset::register($this);
         background-color: whitesmoke;
         color: gray;
     }
-    .main-header h1{margin-top: 5px;}
-    .am-btn {width: 100%}
     a:visited,a:hover { text-decoration: none;}
     </style>
     <style type="text/css">
@@ -80,15 +78,13 @@ AppAsset::register($this);
         float: right;
         color: gray;
     }
-    .am-btn-primary {
-        width: 100%;
-    }
     #img-box img{
         width: 100%;
         margin-top: 10px;
     }
     .img-box img {width: 45px; margin: 5px;}
-
+    .form-group {margin-bottom: 5px;}
+    .btn-bar { width: 100%; }
 </style>
 </head>
 <body>
@@ -99,7 +95,7 @@ AppAsset::register($this);
 <?php if($this->context->id == 'point' && $this->context->module->requestedAction->id == 'index') { ?>
 <?= Html::a('添加', ['/point/create'], ['class' => 'btn btn-success main-post']) ?>
 <?php }else { ?>
-<a class="btn btn-success main-post" href="/post/create<?php if($this->context->id == 'point' && $this->context->module->requestedAction->id == 'view') { echo '?point='.$this->context->actionParams['id']; } ?>">发帖</a>
+<a class="am-btn am-btn-success am-btn-sm main-post" href="/post/create<?php if($this->context->id == 'point' && $this->context->module->requestedAction->id == 'view') { echo '?point='.$this->context->actionParams['id']; } ?>">发帖</a>
 <?php } ?>
 <?php if($this->title != '' && $this->context->id != 'point') { ?>
 <span class="am-icon-chevron-left" id="btn-back"></span><span class='am-icon-location-arrow' id='btn-location'></span>
@@ -148,7 +144,7 @@ AppAsset::register($this);
     </ul>
   </div>
   <div class="am-modal-actions-group">
-    <button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
+    <button class="am-btn am-btn-secondary am-btn-block btn-bar" data-am-modal-close>取消</button>
   </div>
 </div>
 

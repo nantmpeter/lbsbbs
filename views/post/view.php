@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
  -->
  <?php 
      if($comments) {
-        echo '<span>评论列表</span>';
+        echo '<div style="border-bottom: 1px solid #eee;margin-bottom: 15px;">评论列表</div>';
      }  
   foreach ($comments as $key => $value) { ?>
        <div class="comment-box"> <!-- 评论内容容器 -->
