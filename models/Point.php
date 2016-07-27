@@ -34,6 +34,7 @@ class Point extends \yii\db\ActiveRecord
     {
         return [
             [['create_at', 'user_id','post_num','auth'], 'integer'],
+            [['name','lat','lon'],'required'],
             [['name'], 'string', 'max' => 50],
             [['desc'], 'string', 'max' => 256],
             [['lat', 'lon'], 'string', 'max' => 11]
@@ -48,10 +49,10 @@ class Point extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'desc' => 'Desc',
-            'lat' => 'Lat',
-            'lon' => 'Lon',
+            'name' => '地名',
+            'desc' => '描述',
+            'lat' => '纬度',
+            'lon' => '经度',
             'create_at' => 'Create At',
             'user_id' => 'User ID',
             'post_num' => 'Post Num', 

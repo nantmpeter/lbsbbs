@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 </style>
 <div class="post-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'new_point']); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true,'class'=>'am-form-field','placeholder'=>'在此输入地名...']) ?>
 
